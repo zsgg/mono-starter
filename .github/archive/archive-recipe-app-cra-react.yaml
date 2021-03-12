@@ -1,0 +1,34 @@
+name: Recipe App CRA React
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'recipes/csr-react/**'
+
+jobs:
+  deployJob:
+    runs-on: ubuntu-latest
+    steps:
+      ##################
+      # pre jobs START #
+      ##################
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - uses: actions/cache@v2
+        id: lerna-cache
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+      - run: npm run _:package:bootstrap
+        if: steps.lerna-cache.outputs.cache-hit != 'true'
+      ################
+      # pre jobs END #
+      ################
+#      - run: npm run test
+      - run: npm run build
+        working-directory: './recipes/csr-react'

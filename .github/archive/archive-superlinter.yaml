@@ -1,0 +1,90 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  printCurrEnviorment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+      - name: Dump secrets context
+        env:
+          SECRETS: ${{ toJSON(secrets) }}
+        run: |
+          echo "$SECRETS"
+  nextJob1:
+    runs-on: ubuntu-latest
+    steps:
+      ##################
+      # pre jobs START #
+      ##################
+      - uses: actions/checkout@v2
+      - name: Use Node.js 15
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - name: restore lerna
+        id: lerna-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+      - run: npm run _:package:bootstrap
+        if: steps.lerna-cache.outputs.cache-hit != 'true'
+      ################
+      # pre jobs END #
+      ################
+      - run: npm run test
+  nextJob2:
+    runs-on: ubuntu-latest
+    needs: nextJob1
+    steps:
+      ##################
+      # pre jobs START #
+      ##################
+      - uses: actions/checkout@v2
+      - name: Use Node.js 15
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - name: restore lerna
+        id: lerna-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
+      - run: npm run _:package:bootstrap
+        if: steps.lerna-cache.outputs.cache-hit != 'true'
+      ################
+      # pre jobs END #
+      ################
+      - run: npm run test

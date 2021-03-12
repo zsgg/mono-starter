@@ -1,0 +1,19 @@
+{
+  "extends": "../../../.tsconfig/tsconfig.common.base.front.json",
+  "include": [
+    "./"
+  ],
+  "files": [],
+  "exclude": [
+    "../dist", "./test"
+  ],
+  "references": [{
+    "path": "../../../recipes-packages/ui-cssInJs/src"
+  }],
+  "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "checkJs": false,
+    "allowJs": false
+  }
+}

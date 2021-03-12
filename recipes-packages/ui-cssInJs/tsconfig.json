@@ -1,0 +1,6 @@
+{
+  "extends": "../../.tsconfig/tsconfig.common.base.front.json",
+  "compilerOptions": {
+    "composite": true
+  }
+}

@@ -1,0 +1,45 @@
+name: Create Pull Requset
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+      - 'bugfix/**'
+
+jobs:
+  buildJob:
+    runs-on: ubuntu-latest
+    steps:
+      ##################
+      # pre jobs START #
+      ##################
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - uses: actions/cache@v2
+        id: lerna-cache
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/package.json') }}
+      - run: npm run _:package:bootstrap
+        if: steps.lerna-cache.outputs.cache-hit != 'true'
+      ###############
+      # pre jobs END #
+      ################
+      - run: npm run test
+      - run: npm run build
+      - name: Create PR
+        uses: funivan/github-autopr@0.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          args: .repository.default_branch .*-pr -v
+
+      # todo 실패시 슬랙 노티
+
+
+
+
+

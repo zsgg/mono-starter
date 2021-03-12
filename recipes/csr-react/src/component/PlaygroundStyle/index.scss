@@ -1,0 +1,14 @@
+::placeholder {
+  color: gray;
+}
+.isGridTest {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 2fr);
+}
+
+.isGridTest::after {
+  content: '...';
+  color: red;
+}

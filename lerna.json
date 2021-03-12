@@ -1,0 +1,22 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "workspaces": [
+    "apps/**/*",
+    "recipes/**/*",
+    "recipes-packages/**/*"
+  ],
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "*.txt",
+        "test/**",
+        "**/test/**"
+      ],
+      "message": "chore(release): publish %s",
+      "registry": "https://npm.pkg.github.com"
+    }
+  }
+}

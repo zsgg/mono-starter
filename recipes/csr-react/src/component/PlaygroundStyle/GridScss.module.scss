@@ -1,0 +1,6 @@
+.grid{
+  display: grid;
+  gap: 12px;
+  grid-template-areas: '. . . .';
+  grid-template-columns: 1fr;
+}

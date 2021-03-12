@@ -1,0 +1,12 @@
+/.idea/
+/node_modules/
+/**/*/node_modules/
+/lerna-debug.log
+yarn-error.log
+*.map
+*.d.ts
+!global.d.ts
+public
+dist
+build
+out

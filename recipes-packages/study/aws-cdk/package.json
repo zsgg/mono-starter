@@ -1,0 +1,15 @@
+{
+  "name": "aws-cdk",
+  "version": "0.1.0",
+  "bin": {
+    "aws-cdk": "bin/aws-cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "cdk:destroy": "cdk destroy",
+    "watch": "tsc -w"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
