@@ -27,13 +27,16 @@ const fs = require('fs');
 
 function getPackageDir(filepath) {
     let currDir = path.dirname(require.resolve(filepath));
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         if (fs.existsSync(path.join(currDir, 'package.json'))) {
             return currDir;
         }
         const { dir, root } = path.parse(currDir);
         if (dir === root) {
-            throw new Error(`Could not find package.json in the parent directories starting from ${filepath}.`);
+            throw new Error(
+                `Could not find package.json in the parent directories starting from ${filepath}.`,
+            );
         }
         currDir = dir;
     }
