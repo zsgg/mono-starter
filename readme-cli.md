@@ -12,7 +12,7 @@ lerna add commander --scope=@zsgg/recipe-log-cli
 lerna add chalk --scope=@zsgg/recipe-log-core
 
 lerna add @zsgg/recipe-log-core --scope=@zsgg/recipe-log-cli
-lerna add @zsgg/recipe-package--ui-css-in-js --scope=@recipe/csr-react
+lerna add @zsgg/recipe-package--ui-starter --scope=@recipe/csr-react
 npm link recipes/log-cli
 ```
 

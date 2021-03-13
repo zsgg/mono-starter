@@ -13,6 +13,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
         'plugin:jest-dom/recommended',
+        'plugin:mdx/recommended',
     ],
     parser: '@typescript-eslint/parser',
     plugins: [
@@ -198,6 +199,13 @@ module.exports = {
         'react/no-unescaped-entities': 0,
 
         /*
+        export const Button: React.FC<ButtonProps> = ({
+            primary = false,
+                ESLint: 'primary' is missing in props validation(react/prop-types)
+        */
+        'react/prop-types': 0,
+
+        /*
         const App = () => (
             <div>
                 <h1>hello world</h1>
@@ -235,7 +243,7 @@ module.exports = {
         https://www.npmjs.com/package/eslint-import-resolver-typescript
         */
         'import/parsers': {
-            '@typescript-eslint/parser': ['.ts', '.tsx'],
+            '@typescript-eslint/parser': ['.ts', '.tsx', '.mdx'],
         },
         'import/resolver': {
             typescript: {

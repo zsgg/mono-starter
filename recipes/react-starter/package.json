@@ -1,0 +1,33 @@
+{
+  "name": "@recipe/csr-react",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "zsgg",
+  "main": "index",
+  "scripts": {
+    "build": "cross-env AUTOPREFIXER_GRID=autoplace NODE_ENV=production TS_NODE_PROJECT=\"src/tsconfig.build.json\" webpack --config webpack.config.production.js",
+    "build:run": "npx live-server dist",
+    "dev": "cross-env AUTOPREFIXER_GRID=autoplace NODE_ENV=development TS_NODE_PROJECT=\"src/tsconfig.build.json\" webpack serve --config webpack.config.development.js"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "@zsgg/recipe-package--ui-starter": "*",
+    "@zsgg/recipe-package--util-starter": "*",
+    "core-js": "^3.9.1",
+    "fxjs": "^0.21.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "rxjs": "^6.6.6",
+    "stylis": "^4.0.7"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router": "^5.1.12",
+    "@types/react-router-dom": "^5.1.7"
+  }
+}
