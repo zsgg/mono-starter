@@ -61,6 +61,12 @@ module.exports = {
         'class-methods-use-this': 0,
 
         /*
+        return () => {
+            ESLint: Arrow function expected no return value.(consistent-return)
+        */
+        'consistent-return': 0,
+
+        /*
         require('autoprefixer'),
             ESLint: Unexpected require().(global-require)
          */
